@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.zju.gislab.QDServices.mapper.SouthoceanZooplanktonMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.zju.gislab.QDServices.po.SouthoceanZooplankton" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="layerid" property="layerid" jdbcType="INTEGER" />
+    <result column="no" property="no" jdbcType="INTEGER" />
+    <result column="voy" property="voy" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="sampway" property="sampway" jdbcType="VARCHAR" />
+    <result column="station" property="station" jdbcType="VARCHAR" />
+    <result column="lon" property="lon" jdbcType="NUMERIC" />
+    <result column="lat" property="lat" jdbcType="NUMERIC" />
+    <result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+    <result column="trawlnet" property="trawlnet" jdbcType="VARCHAR" />
+    <result column="phylum" property="phylum" jdbcType="VARCHAR" />
+    <result column="class" property="class" jdbcType="VARCHAR" />
+    <result column="class_l" property="classL" jdbcType="VARCHAR" />
+    <result column="order_c" property="orderC" jdbcType="VARCHAR" />
+    <result column="order_l" property="orderL" jdbcType="VARCHAR" />
+    <result column="family" property="family" jdbcType="VARCHAR" />
+    <result column="family_l" property="familyL" jdbcType="VARCHAR" />
+    <result column="genus" property="genus" jdbcType="VARCHAR" />
+    <result column="genus_l" property="genusL" jdbcType="VARCHAR" />
+    <result column="group_c" property="groupC" jdbcType="VARCHAR" />
+    <result column="species" property="species" jdbcType="VARCHAR" />
+    <result column="species_l" property="speciesL" jdbcType="VARCHAR" />
+    <result column="density" property="density" jdbcType="NUMERIC" />
+    <result column="biomass" property="biomass" jdbcType="NUMERIC" />
+    <result column="surveyor" property="surveyor" jdbcType="VARCHAR" />
+    <result column="medium" property="medium" jdbcType="VARCHAR" />
+    <result column="extway" property="extway" jdbcType="VARCHAR" />
+    <result column="recorder" property="recorder" jdbcType="VARCHAR" />
+    <result column="collector" property="collector" jdbcType="VARCHAR" />
+    <result column="entryper" property="entryper" jdbcType="VARCHAR" />
+    <result column="reader" property="reader" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, layerid, no, voy, area, sampway, station, lon, lat, mtime, trawlnet, phylum, 
+    class, class_l, order_c, order_l, family, family_l, genus, genus_l, group_c, species, 
+    species_l, density, biomass, surveyor, medium, extway, recorder, collector, entryper, 
+    reader
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.zju.gislab.QDServices.po.SouthoceanZooplanktonExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from southocean_zooplankton
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from southocean_zooplankton
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from southocean_zooplankton
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.edu.zju.gislab.QDServices.po.SouthoceanZooplanktonExample" >
+    delete from southocean_zooplankton
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.edu.zju.gislab.QDServices.po.SouthoceanZooplankton" >
+    insert into southocean_zooplankton (id, layerid, no, 
+      voy, area, sampway, 
+      station, lon, lat, 
+      mtime, trawlnet, phylum, 
+      class, class_l, order_c, 
+      order_l, family, family_l, 
+      genus, genus_l, group_c, 
+      species, species_l, density, 
+      biomass, surveyor, medium, 
+      extway, recorder, collector, 
+      entryper, reader)
+    values (#{id,jdbcType=INTEGER}, #{layerid,jdbcType=INTEGER}, #{no,jdbcType=INTEGER}, 
+      #{voy,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{sampway,jdbcType=VARCHAR}, 
+      #{station,jdbcType=VARCHAR}, #{lon,jdbcType=NUMERIC}, #{lat,jdbcType=NUMERIC}, 
+      #{mtime,jdbcType=TIMESTAMP}, #{trawlnet,jdbcType=VARCHAR}, #{phylum,jdbcType=VARCHAR}, 
+      #{class,jdbcType=VARCHAR}, #{classL,jdbcType=VARCHAR}, #{orderC,jdbcType=VARCHAR}, 
+      #{orderL,jdbcType=VARCHAR}, #{family,jdbcType=VARCHAR}, #{familyL,jdbcType=VARCHAR}, 
+      #{genus,jdbcType=VARCHAR}, #{genusL,jdbcType=VARCHAR}, #{groupC,jdbcType=VARCHAR}, 
+      #{species,jdbcType=VARCHAR}, #{speciesL,jdbcType=VARCHAR}, #{density,jdbcType=NUMERIC}, 
+      #{biomass,jdbcType=NUMERIC}, #{surveyor,jdbcType=VARCHAR}, #{medium,jdbcType=VARCHAR}, 
+      #{extway,jdbcType=VARCHAR}, #{recorder,jdbcType=VARCHAR}, #{collector,jdbcType=VARCHAR}, 
+      #{entryper,jdbcType=VARCHAR}, #{reader,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.zju.gislab.QDServices.po.SouthoceanZooplankton" >
+    insert into southocean_zooplankton
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="layerid != null" >
+        layerid,
+      </if>
+      <if test="no != null" >
+        no,
+      </if>
+      <if test="voy != null" >
+        voy,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="sampway != null" >
+        sampway,
+      </if>
+      <if test="station != null" >
+        station,
+      </if>
+      <if test="lon != null" >
+        lon,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="mtime != null" >
+        mtime,
+      </if>
+      <if test="trawlnet != null" >
+        trawlnet,
+      </if>
+      <if test="phylum != null" >
+        phylum,
+      </if>
+      <if test="class != null" >
+        class,
+      </if>
+      <if test="classL != null" >
+        class_l,
+      </if>
+      <if test="orderC != null" >
+        order_c,
+      </if>
+      <if test="orderL != null" >
+        order_l,
+      </if>
+      <if test="family != null" >
+        family,
+      </if>
+      <if test="familyL != null" >
+        family_l,
+      </if>
+      <if test="genus != null" >
+        genus,
+      </if>
+      <if test="genusL != null" >
+        genus_l,
+      </if>
+      <if test="groupC != null" >
+        group_c,
+      </if>
+      <if test="species != null" >
+        species,
+      </if>
+      <if test="speciesL != null" >
+        species_l,
+      </if>
+      <if test="density != null" >
+        density,
+      </if>
+      <if test="biomass != null" >
+        biomass,
+      </if>
+      <if test="surveyor != null" >
+        surveyor,
+      </if>
+      <if test="medium != null" >
+        medium,
+      </if>
+      <if test="extway != null" >
+        extway,
+      </if>
+      <if test="recorder != null" >
+        recorder,
+      </if>
+      <if test="collector != null" >
+        collector,
+      </if>
+      <if test="entryper != null" >
+        entryper,
+      </if>
+      <if test="reader != null" >
+        reader,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="layerid != null" >
+        #{layerid,jdbcType=INTEGER},
+      </if>
+      <if test="no != null" >
+        #{no,jdbcType=INTEGER},
+      </if>
+      <if test="voy != null" >
+        #{voy,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="sampway != null" >
+        #{sampway,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null" >
+        #{station,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null" >
+        #{lon,jdbcType=NUMERIC},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=NUMERIC},
+      </if>
+      <if test="mtime != null" >
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trawlnet != null" >
+        #{trawlnet,jdbcType=VARCHAR},
+      </if>
+      <if test="phylum != null" >
+        #{phylum,jdbcType=VARCHAR},
+      </if>
+      <if test="class != null" >
+        #{class,jdbcType=VARCHAR},
+      </if>
+      <if test="classL != null" >
+        #{classL,jdbcType=VARCHAR},
+      </if>
+      <if test="orderC != null" >
+        #{orderC,jdbcType=VARCHAR},
+      </if>
+      <if test="orderL != null" >
+        #{orderL,jdbcType=VARCHAR},
+      </if>
+      <if test="family != null" >
+        #{family,jdbcType=VARCHAR},
+      </if>
+      <if test="familyL != null" >
+        #{familyL,jdbcType=VARCHAR},
+      </if>
+      <if test="genus != null" >
+        #{genus,jdbcType=VARCHAR},
+      </if>
+      <if test="genusL != null" >
+        #{genusL,jdbcType=VARCHAR},
+      </if>
+      <if test="groupC != null" >
+        #{groupC,jdbcType=VARCHAR},
+      </if>
+      <if test="species != null" >
+        #{species,jdbcType=VARCHAR},
+      </if>
+      <if test="speciesL != null" >
+        #{speciesL,jdbcType=VARCHAR},
+      </if>
+      <if test="density != null" >
+        #{density,jdbcType=NUMERIC},
+      </if>
+      <if test="biomass != null" >
+        #{biomass,jdbcType=NUMERIC},
+      </if>
+      <if test="surveyor != null" >
+        #{surveyor,jdbcType=VARCHAR},
+      </if>
+      <if test="medium != null" >
+        #{medium,jdbcType=VARCHAR},
+      </if>
+      <if test="extway != null" >
+        #{extway,jdbcType=VARCHAR},
+      </if>
+      <if test="recorder != null" >
+        #{recorder,jdbcType=VARCHAR},
+      </if>
+      <if test="collector != null" >
+        #{collector,jdbcType=VARCHAR},
+      </if>
+      <if test="entryper != null" >
+        #{entryper,jdbcType=VARCHAR},
+      </if>
+      <if test="reader != null" >
+        #{reader,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.edu.zju.gislab.QDServices.po.SouthoceanZooplanktonExample" resultType="java.lang.Integer" >
+    select count(*) from southocean_zooplankton
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update southocean_zooplankton
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.layerid != null" >
+        layerid = #{record.layerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.no != null" >
+        no = #{record.no,jdbcType=INTEGER},
+      </if>
+      <if test="record.voy != null" >
+        voy = #{record.voy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sampway != null" >
+        sampway = #{record.sampway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.station != null" >
+        station = #{record.station,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lon != null" >
+        lon = #{record.lon,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lat != null" >
+        lat = #{record.lat,jdbcType=NUMERIC},
+      </if>
+      <if test="record.mtime != null" >
+        mtime = #{record.mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.trawlnet != null" >
+        trawlnet = #{record.trawlnet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phylum != null" >
+        phylum = #{record.phylum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.class != null" >
+        class = #{record.class,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classL != null" >
+        class_l = #{record.classL,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderC != null" >
+        order_c = #{record.orderC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderL != null" >
+        order_l = #{record.orderL,jdbcType=VARCHAR},
+      </if>
+      <if test="record.family != null" >
+        family = #{record.family,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyL != null" >
+        family_l = #{record.familyL,jdbcType=VARCHAR},
+      </if>
+      <if test="record.genus != null" >
+        genus = #{record.genus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.genusL != null" >
+        genus_l = #{record.genusL,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupC != null" >
+        group_c = #{record.groupC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.species != null" >
+        species = #{record.species,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speciesL != null" >
+        species_l = #{record.speciesL,jdbcType=VARCHAR},
+      </if>
+      <if test="record.density != null" >
+        density = #{record.density,jdbcType=NUMERIC},
+      </if>
+      <if test="record.biomass != null" >
+        biomass = #{record.biomass,jdbcType=NUMERIC},
+      </if>
+      <if test="record.surveyor != null" >
+        surveyor = #{record.surveyor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medium != null" >
+        medium = #{record.medium,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extway != null" >
+        extway = #{record.extway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recorder != null" >
+        recorder = #{record.recorder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collector != null" >
+        collector = #{record.collector,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entryper != null" >
+        entryper = #{record.entryper,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reader != null" >
+        reader = #{record.reader,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update southocean_zooplankton
+    set id = #{record.id,jdbcType=INTEGER},
+      layerid = #{record.layerid,jdbcType=INTEGER},
+      no = #{record.no,jdbcType=INTEGER},
+      voy = #{record.voy,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      sampway = #{record.sampway,jdbcType=VARCHAR},
+      station = #{record.station,jdbcType=VARCHAR},
+      lon = #{record.lon,jdbcType=NUMERIC},
+      lat = #{record.lat,jdbcType=NUMERIC},
+      mtime = #{record.mtime,jdbcType=TIMESTAMP},
+      trawlnet = #{record.trawlnet,jdbcType=VARCHAR},
+      phylum = #{record.phylum,jdbcType=VARCHAR},
+      class = #{record.class,jdbcType=VARCHAR},
+      class_l = #{record.classL,jdbcType=VARCHAR},
+      order_c = #{record.orderC,jdbcType=VARCHAR},
+      order_l = #{record.orderL,jdbcType=VARCHAR},
+      family = #{record.family,jdbcType=VARCHAR},
+      family_l = #{record.familyL,jdbcType=VARCHAR},
+      genus = #{record.genus,jdbcType=VARCHAR},
+      genus_l = #{record.genusL,jdbcType=VARCHAR},
+      group_c = #{record.groupC,jdbcType=VARCHAR},
+      species = #{record.species,jdbcType=VARCHAR},
+      species_l = #{record.speciesL,jdbcType=VARCHAR},
+      density = #{record.density,jdbcType=NUMERIC},
+      biomass = #{record.biomass,jdbcType=NUMERIC},
+      surveyor = #{record.surveyor,jdbcType=VARCHAR},
+      medium = #{record.medium,jdbcType=VARCHAR},
+      extway = #{record.extway,jdbcType=VARCHAR},
+      recorder = #{record.recorder,jdbcType=VARCHAR},
+      collector = #{record.collector,jdbcType=VARCHAR},
+      entryper = #{record.entryper,jdbcType=VARCHAR},
+      reader = #{record.reader,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.zju.gislab.QDServices.po.SouthoceanZooplankton" >
+    update southocean_zooplankton
+    <set >
+      <if test="layerid != null" >
+        layerid = #{layerid,jdbcType=INTEGER},
+      </if>
+      <if test="no != null" >
+        no = #{no,jdbcType=INTEGER},
+      </if>
+      <if test="voy != null" >
+        voy = #{voy,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="sampway != null" >
+        sampway = #{sampway,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null" >
+        station = #{station,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null" >
+        lon = #{lon,jdbcType=NUMERIC},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=NUMERIC},
+      </if>
+      <if test="mtime != null" >
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trawlnet != null" >
+        trawlnet = #{trawlnet,jdbcType=VARCHAR},
+      </if>
+      <if test="phylum != null" >
+        phylum = #{phylum,jdbcType=VARCHAR},
+      </if>
+      <if test="class != null" >
+        class = #{class,jdbcType=VARCHAR},
+      </if>
+      <if test="classL != null" >
+        class_l = #{classL,jdbcType=VARCHAR},
+      </if>
+      <if test="orderC != null" >
+        order_c = #{orderC,jdbcType=VARCHAR},
+      </if>
+      <if test="orderL != null" >
+        order_l = #{orderL,jdbcType=VARCHAR},
+      </if>
+      <if test="family != null" >
+        family = #{family,jdbcType=VARCHAR},
+      </if>
+      <if test="familyL != null" >
+        family_l = #{familyL,jdbcType=VARCHAR},
+      </if>
+      <if test="genus != null" >
+        genus = #{genus,jdbcType=VARCHAR},
+      </if>
+      <if test="genusL != null" >
+        genus_l = #{genusL,jdbcType=VARCHAR},
+      </if>
+      <if test="groupC != null" >
+        group_c = #{groupC,jdbcType=VARCHAR},
+      </if>
+      <if test="species != null" >
+        species = #{species,jdbcType=VARCHAR},
+      </if>
+      <if test="speciesL != null" >
+        species_l = #{speciesL,jdbcType=VARCHAR},
+      </if>
+      <if test="density != null" >
+        density = #{density,jdbcType=NUMERIC},
+      </if>
+      <if test="biomass != null" >
+        biomass = #{biomass,jdbcType=NUMERIC},
+      </if>
+      <if test="surveyor != null" >
+        surveyor = #{surveyor,jdbcType=VARCHAR},
+      </if>
+      <if test="medium != null" >
+        medium = #{medium,jdbcType=VARCHAR},
+      </if>
+      <if test="extway != null" >
+        extway = #{extway,jdbcType=VARCHAR},
+      </if>
+      <if test="recorder != null" >
+        recorder = #{recorder,jdbcType=VARCHAR},
+      </if>
+      <if test="collector != null" >
+        collector = #{collector,jdbcType=VARCHAR},
+      </if>
+      <if test="entryper != null" >
+        entryper = #{entryper,jdbcType=VARCHAR},
+      </if>
+      <if test="reader != null" >
+        reader = #{reader,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.zju.gislab.QDServices.po.SouthoceanZooplankton" >
+    update southocean_zooplankton
+    set layerid = #{layerid,jdbcType=INTEGER},
+      no = #{no,jdbcType=INTEGER},
+      voy = #{voy,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      sampway = #{sampway,jdbcType=VARCHAR},
+      station = #{station,jdbcType=VARCHAR},
+      lon = #{lon,jdbcType=NUMERIC},
+      lat = #{lat,jdbcType=NUMERIC},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      trawlnet = #{trawlnet,jdbcType=VARCHAR},
+      phylum = #{phylum,jdbcType=VARCHAR},
+      class = #{class,jdbcType=VARCHAR},
+      class_l = #{classL,jdbcType=VARCHAR},
+      order_c = #{orderC,jdbcType=VARCHAR},
+      order_l = #{orderL,jdbcType=VARCHAR},
+      family = #{family,jdbcType=VARCHAR},
+      family_l = #{familyL,jdbcType=VARCHAR},
+      genus = #{genus,jdbcType=VARCHAR},
+      genus_l = #{genusL,jdbcType=VARCHAR},
+      group_c = #{groupC,jdbcType=VARCHAR},
+      species = #{species,jdbcType=VARCHAR},
+      species_l = #{speciesL,jdbcType=VARCHAR},
+      density = #{density,jdbcType=NUMERIC},
+      biomass = #{biomass,jdbcType=NUMERIC},
+      surveyor = #{surveyor,jdbcType=VARCHAR},
+      medium = #{medium,jdbcType=VARCHAR},
+      extway = #{extway,jdbcType=VARCHAR},
+      recorder = #{recorder,jdbcType=VARCHAR},
+      collector = #{collector,jdbcType=VARCHAR},
+      entryper = #{entryper,jdbcType=VARCHAR},
+      reader = #{reader,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
